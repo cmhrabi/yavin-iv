@@ -1,10 +1,25 @@
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { MOCK_API_KEYS } from "@/lib/mock-data";
-import { relativeTime } from "@/lib/format";
+import { auth } from "@/server/auth";
+import { listApiKeys } from "@/server/api-keys";
+import { ApiKeysSection } from "./_components/api-keys-section";
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    redirect("/api/auth/signin");
+  }
+
+  const keys = await listApiKeys(session.user.id);
+  const initial = keys.map((k) => ({
+    id: k.id,
+    label: k.label,
+    keyPrefix: k.keyPrefix,
+    createdAt: k.createdAt.toISOString(),
+    lastUsedAt: k.lastUsedAt ? k.lastUsedAt.toISOString() : null,
+  }));
+
   return (
     <div className="max-w-3xl space-y-8 p-6">
       <div>
@@ -14,44 +29,7 @@ export default function SettingsPage() {
         </p>
       </div>
 
-      <section className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold">API keys</h2>
-          <Button size="sm">New key</Button>
-        </div>
-        <div className="overflow-hidden rounded-md border">
-          <table className="w-full text-sm">
-            <thead className="bg-muted/50 text-muted-foreground text-left text-xs uppercase tracking-wider">
-              <tr>
-                <th className="px-4 py-2 font-medium">Label</th>
-                <th className="px-4 py-2 font-medium">Key</th>
-                <th className="px-4 py-2 font-medium">Created</th>
-                <th className="px-4 py-2 font-medium">Last used</th>
-                <th className="px-4 py-2"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {MOCK_API_KEYS.map((k) => (
-                <tr key={k.id}>
-                  <td className="px-4 py-2 font-medium">{k.label}</td>
-                  <td className="px-4 py-2 font-mono text-xs">{k.prefix}</td>
-                  <td className="text-muted-foreground px-4 py-2 text-xs">
-                    {relativeTime(k.createdAt)}
-                  </td>
-                  <td className="text-muted-foreground px-4 py-2 text-xs">
-                    {k.lastUsedAt ? relativeTime(k.lastUsedAt) : "never"}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    <Button size="sm" variant="ghost">
-                      Revoke
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <ApiKeysSection initial={initial} />
 
       <Separator />
 

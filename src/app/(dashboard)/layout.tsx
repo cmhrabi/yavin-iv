@@ -1,11 +1,18 @@
+import { redirect } from "next/navigation";
 import { Nav } from "@/components/nav";
-import { Badge } from "@/components/ui/badge";
+import { UserMenu } from "@/components/user-menu";
+import { auth } from "@/server/auth";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+  if (!session?.user?.email) {
+    redirect("/api/auth/signin");
+  }
+
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       <aside className="bg-sidebar text-sidebar-foreground w-56 shrink-0 border-r">
@@ -21,9 +28,7 @@ export default function DashboardLayout({
           <span className="text-muted-foreground text-sm">
             Dashboard for AI-driven SDLC runs
           </span>
-          <Badge variant="outline" className="font-mono text-xs">
-            key: laptop
-          </Badge>
+          <UserMenu email={session.user.email} />
         </header>
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>

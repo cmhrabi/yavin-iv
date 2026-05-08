@@ -6,14 +6,6 @@ import type {
   Stage,
 } from "@yavin/protocol";
 
-export interface MockApiKey {
-  id: string;
-  label: string;
-  prefix: string;
-  createdAt: string;
-  lastUsedAt: string | null;
-}
-
 const REPO_ID_A = "repo-aaaaaaaa-1111-1111-1111-111111111111";
 const REPO_ID_B = "repo-bbbbbbbb-2222-2222-2222-222222222222";
 
@@ -223,30 +215,6 @@ export const MOCK_EVENTS: Event[] = MOCK_RUNS.flatMap((run, runIdx) => {
 });
 
 export const MOCK_AGENT_MESSAGES: AgentMessage[] = [];
-
-export const MOCK_API_KEYS: MockApiKey[] = [
-  {
-    id: "key-1",
-    label: "laptop",
-    prefix: "yvn_live_a8f3…",
-    createdAt: "2026-04-10T08:00:00Z",
-    lastUsedAt: "2026-05-07T09:55:00Z",
-  },
-  {
-    id: "key-2",
-    label: "desktop",
-    prefix: "yvn_live_b2c1…",
-    createdAt: "2026-04-22T14:30:00Z",
-    lastUsedAt: "2026-05-07T08:42:00Z",
-  },
-  {
-    id: "key-3",
-    label: "ci",
-    prefix: "yvn_live_c4d9…",
-    createdAt: "2026-04-29T10:00:00Z",
-    lastUsedAt: "2026-05-06T13:22:00Z",
-  },
-];
 
 export function findMockRun(id: string): Run | undefined {
   return MOCK_RUNS.find((r) => r.id === id);
