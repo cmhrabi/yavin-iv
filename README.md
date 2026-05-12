@@ -34,5 +34,5 @@ pnpm dev                        # http://localhost:3000
 - `src/components/` — UI components (shadcn primitives in `ui/`)
 - `src/db/` — Drizzle schema, client, migrations
 - `src/lib/` — utilities and (for now) mock data
-- `packages/protocol/` — `@yavin/protocol` shared types between yavin-iv and rogue-one
+- `packages/protocol/` — `@cmhrabi/yavin-protocol` shared types between yavin-iv and rogue-one (see [`INTEGRATION.md`](./INTEGRATION.md))
 - `server.ts` — custom Next.js entry (the WebSocket server attaches here in the next phase)

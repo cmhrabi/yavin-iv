@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { RepoConfig, TicketProvider } from "@yavin/protocol";
-import { TICKET_PROVIDERS } from "@yavin/protocol";
+import type { RepoConfig, TicketProvider } from "@cmhrabi/yavin-protocol";
+import { TICKET_PROVIDERS } from "@cmhrabi/yavin-protocol";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

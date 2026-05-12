@@ -3,7 +3,7 @@ import type {
   ServerToWorker,
   Run,
   WorkerToServer,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 
 const token = process.env.YAVIN_API_KEY ?? process.env.WS_PROBE_TOKEN;
 if (!token) {

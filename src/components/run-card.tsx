@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Run, RepoConfig } from "@yavin/protocol";
+import type { Run, RepoConfig } from "@cmhrabi/yavin-protocol";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { StatusPill } from "@/components/status-pill";
 import { elapsed, formatCost, relativeTime } from "@/lib/format";

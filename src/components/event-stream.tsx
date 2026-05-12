@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Event } from "@yavin/protocol";
+import type { Event } from "@cmhrabi/yavin-protocol";
 import { ChevronRight, Hammer, MessageSquare, ScrollText, Wrench } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";

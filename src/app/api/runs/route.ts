@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TICKET_PROVIDERS } from "@yavin/protocol";
+import { TICKET_PROVIDERS } from "@cmhrabi/yavin-protocol";
 import { requireCaller } from "@/server/caller";
 import {
   RepoConfigNotFoundError,

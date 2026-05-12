@@ -4,7 +4,7 @@ import {
   GATE_KINDS,
   type GateDecision,
   type GateKind,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 import { requireCaller } from "@/server/caller";
 import { isRunOwnedBy, InvalidTransitionError } from "@/server/runs";
 import {

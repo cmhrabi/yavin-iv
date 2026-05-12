@@ -1,0 +1,39 @@
+name: Publish @cmhrabi/yavin-protocol
+
+on:
+  push:
+    tags:
+      - "protocol-v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@cmhrabi"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build protocol package
+        run: pnpm --filter @cmhrabi/yavin-protocol build
+
+      - name: Publish to GitHub Packages
+        run: pnpm --filter @cmhrabi/yavin-protocol publish --no-git-checks --access restricted
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

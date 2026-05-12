@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import type { RepoConfig, TicketProvider } from "@yavin/protocol";
+import type { RepoConfig, TicketProvider } from "@cmhrabi/yavin-protocol";
 import { eq } from "drizzle-orm";
 import { auth } from "@/server/auth";
 import { getRun } from "@/server/runs";

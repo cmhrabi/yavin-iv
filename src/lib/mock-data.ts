@@ -7,7 +7,7 @@ import type {
   RepoConfig,
   Run,
   Stage,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 
 const REPO_ID_A = "repo-aaaaaaaa-1111-1111-1111-111111111111";
 const REPO_ID_B = "repo-bbbbbbbb-2222-2222-2222-222222222222";

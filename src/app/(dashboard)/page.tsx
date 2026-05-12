@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import type { RepoConfig, TicketProvider } from "@yavin/protocol";
+import type { RepoConfig, TicketProvider } from "@cmhrabi/yavin-protocol";
 import { RunCard } from "@/components/run-card";
 import { NewRunButton } from "@/components/new-run-dialog";
 import { Button } from "@/components/ui/button";

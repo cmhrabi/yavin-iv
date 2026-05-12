@@ -1,5 +1,5 @@
 import { eq, sql } from "drizzle-orm";
-import type { Event, EventInput } from "@yavin/protocol";
+import type { Event, EventInput } from "@cmhrabi/yavin-protocol";
 import { db, schema } from "@/db/client";
 import { publish } from "@/server/pubsub";
 

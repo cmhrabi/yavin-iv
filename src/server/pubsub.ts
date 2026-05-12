@@ -1,6 +1,6 @@
 import postgres from "postgres";
 import { sql } from "drizzle-orm";
-import type { ServerToClient } from "@yavin/protocol";
+import type { ServerToClient } from "@cmhrabi/yavin-protocol";
 import { db } from "@/db/client";
 
 const CHANNEL = "yavin_events";

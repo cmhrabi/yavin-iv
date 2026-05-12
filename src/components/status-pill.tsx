@@ -1,4 +1,4 @@
-import type { RunStatus } from "@yavin/protocol";
+import type { RunStatus } from "@cmhrabi/yavin-protocol";
 import { cn } from "@/lib/utils";
 
 const styles: Record<RunStatus, string> = {

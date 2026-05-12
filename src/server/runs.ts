@@ -8,7 +8,7 @@ import {
   type StageKind,
   type StageStatus,
   type TicketProvider,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 import { db, schema } from "@/db/client";
 
 type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
@@ -117,7 +117,7 @@ export async function getRun(
 ): Promise<{
   run: Run;
   stages: Stage[];
-  events: import("@yavin/protocol").Event[];
+  events: import("@cmhrabi/yavin-protocol").Event[];
 } | null> {
   const [runRow] = await db
     .select()

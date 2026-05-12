@@ -23,7 +23,7 @@ import {
   STAGE_KINDS,
   STAGE_STATUSES,
   TICKET_PROVIDERS,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 
 // Reuse the protocol unions as the source of truth for enums.
 // `as [string, ...string[]]` satisfies pgEnum's tuple requirement without

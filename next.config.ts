@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const config: NextConfig = {
-  transpilePackages: ["@yavin/protocol"],
+  transpilePackages: ["@cmhrabi/yavin-protocol"],
   experimental: {
     typedRoutes: false,
   },

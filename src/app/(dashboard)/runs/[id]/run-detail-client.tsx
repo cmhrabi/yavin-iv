@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { Event, GateKind, RepoConfig, Run, Stage, StageKind } from "@yavin/protocol";
+import type { Event, GateKind, RepoConfig, Run, Stage, StageKind } from "@cmhrabi/yavin-protocol";
 import { StatusPill } from "@/components/status-pill";
 import { StageTimeline } from "@/components/stage-timeline";
 import { EventStream } from "@/components/event-stream";

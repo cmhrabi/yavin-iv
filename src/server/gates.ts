@@ -1,5 +1,5 @@
 import { and, eq } from "drizzle-orm";
-import type { GateDecision, GateKind, Run, RunStatus, StageKind } from "@yavin/protocol";
+import type { GateDecision, GateKind, Run, RunStatus, StageKind } from "@cmhrabi/yavin-protocol";
 import { db, schema } from "@/db/client";
 import { publish } from "@/server/pubsub";
 import { InvalidTransitionError, transitionStatus } from "@/server/runs";

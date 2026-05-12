@@ -8,7 +8,7 @@ import type {
   ClientToServer,
   Ticket,
   RepoConfig,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 import { eq } from "drizzle-orm";
 import type { Caller } from "@/server/caller";
 import { resolveCallerFromUpgrade, parseUpgradeUrl } from "@/server/ws-auth";
@@ -292,7 +292,7 @@ async function handleWorkerMessage(ws: WebSocket, msg: WorkerToServer): Promise<
       if (stageRow) {
         const stage = await updateStage(
           stageRow.runId,
-          stageRow.kind as import("@yavin/protocol").StageKind,
+          stageRow.kind as import("@cmhrabi/yavin-protocol").StageKind,
           {
             status: "failed",
             endedAt: new Date(),
@@ -361,7 +361,7 @@ async function handleWorkerMessage(ws: WebSocket, msg: WorkerToServer): Promise<
 
 function gateKindToAwaitingStatus(
   gateKind: GateKind,
-): import("@yavin/protocol").RunStatus {
+): import("@cmhrabi/yavin-protocol").RunStatus {
   switch (gateKind) {
     case "post_research":
       return "awaiting_research_approval";

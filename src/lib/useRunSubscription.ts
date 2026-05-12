@@ -7,7 +7,7 @@ import type {
   Run,
   ServerToClient,
   Stage,
-} from "@yavin/protocol";
+} from "@cmhrabi/yavin-protocol";
 
 const RECONNECT_DELAY_MS = 1000;
 

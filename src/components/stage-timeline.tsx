@@ -1,6 +1,6 @@
 "use client";
 
-import type { Stage, StageKind } from "@yavin/protocol";
+import type { Stage, StageKind } from "@cmhrabi/yavin-protocol";
 import { Check, Circle, Clock, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { elapsed } from "@/lib/format";

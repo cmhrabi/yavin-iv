@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "@yavin/protocol": path.resolve(__dirname, "packages/protocol/src/index.ts"),
+      "@cmhrabi/yavin-protocol": path.resolve(__dirname, "packages/protocol/src/index.ts"),
     },
   },
 });

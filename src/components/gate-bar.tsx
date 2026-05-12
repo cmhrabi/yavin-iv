@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { GateKind } from "@yavin/protocol";
+import type { GateKind } from "@cmhrabi/yavin-protocol";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
