@@ -11,6 +11,7 @@ import { GateBar } from "@/components/gate-bar";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { elapsed, formatCost } from "@/lib/format";
+import { useRunSubscription } from "@/lib/useRunSubscription";
 
 const GATE_FOR_STATUS: Partial<Record<Run["status"], GateKind>> = {
   awaiting_research_approval: "post_research",
@@ -19,16 +20,21 @@ const GATE_FOR_STATUS: Partial<Record<Run["status"], GateKind>> = {
 };
 
 export function RunDetailClient({
-  run,
+  run: initialRun,
   repo,
-  stages,
-  events,
+  stages: initialStages,
+  events: initialEvents,
 }: {
   run: Run;
   repo: RepoConfig | null;
   stages: Stage[];
   events: Event[];
 }) {
+  const { run, stages, events, connected, send } = useRunSubscription({
+    run: initialRun,
+    stages: initialStages,
+    events: initialEvents,
+  });
   const [selected, setSelected] = useState<StageKind>(run.currentStage ?? "research");
   const stage = useMemo(() => stages.find((s) => s.kind === selected), [stages, selected]);
   const stageEvents = useMemo(
@@ -50,6 +56,10 @@ export function RunDetailClient({
               <span>{run.branchName}</span>
             </>
           )}
+          <span>·</span>
+          <span className={connected ? "text-emerald-600" : "text-amber-600"}>
+            {connected ? "live" : "offline"}
+          </span>
         </div>
         <div className="flex items-start justify-between gap-4">
           <h1 className="text-xl font-semibold">{run.ticketTitle ?? "Untitled"}</h1>
@@ -58,7 +68,7 @@ export function RunDetailClient({
         <div className="text-muted-foreground flex flex-wrap gap-3 text-xs">
           <span>elapsed {elapsed(run.createdAt, run.updatedAt)}</span>
           <span>cost {formatCost(run.costUsd)}</span>
-          <span>by {run.createdBy}</span>
+          <span>by {run.createdBy.slice(0, 8)}</span>
           <a
             href={run.ticketUrl}
             target="_blank"
@@ -92,7 +102,17 @@ export function RunDetailClient({
         </aside>
       </div>
 
-      {gate && <GateBar gateKind={gate} />}
+      {gate && (
+        <GateBar
+          gateKind={gate}
+          onApprove={() =>
+            send({ kind: "gate.decide", runId: run.id, gateKind: gate, decision: "approved" })
+          }
+          onReject={() =>
+            send({ kind: "gate.decide", runId: run.id, gateKind: gate, decision: "rejected" })
+          }
+        />
+      )}
     </div>
   );
 }

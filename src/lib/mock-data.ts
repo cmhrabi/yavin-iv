@@ -1,3 +1,6 @@
+// NOTE: no longer the live data source — dashboard reads runs from Postgres
+// via `@/server/runs`. Kept in-tree for tests, storybook-style previews, and
+// the run-detail mock fixtures that still exercise stage renderers.
 import type {
   AgentMessage,
   Event,

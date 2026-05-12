@@ -1,21 +1,54 @@
-import { notFound } from "next/navigation";
-import { findMockRun, stagesForRun, eventsForRun, repoForId } from "@/lib/mock-data";
+import { notFound, redirect } from "next/navigation";
+import type { RepoConfig, TicketProvider } from "@yavin/protocol";
+import { eq } from "drizzle-orm";
+import { auth } from "@/server/auth";
+import { getRun } from "@/server/runs";
+import { db, schema } from "@/db/client";
 import { RunDetailClient } from "./run-detail-client";
+
+async function loadRepo(repoConfigId: string): Promise<RepoConfig | null> {
+  const [row] = await db
+    .select()
+    .from(schema.repoConfigs)
+    .where(eq(schema.repoConfigs.id, repoConfigId))
+    .limit(1);
+  if (!row) return null;
+  return {
+    id: row.id,
+    name: row.name,
+    repoPath: row.repoPath,
+    baseBranch: row.baseBranch,
+    branchPrefix: row.branchPrefix,
+    concurrencyLimit: row.concurrencyLimit,
+    ticketProviders: Array.isArray(row.ticketProviders)
+      ? (row.ticketProviders as TicketProvider[])
+      : [],
+    githubRepo: row.githubRepo,
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  };
+}
 
 export default async function RunDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const run = findMockRun(id);
-  if (!run) notFound();
+  const session = await auth();
+  if (!session?.user?.id) redirect("/api/auth/signin");
 
-  const stages = stagesForRun(run.id);
-  const events = eventsForRun(run.id);
-  const repo = repoForId(run.repoConfigId);
+  const { id } = await params;
+  const data = await getRun(id, session.user.id);
+  if (!data) notFound();
+
+  const repo = await loadRepo(data.run.repoConfigId);
 
   return (
-    <RunDetailClient run={run} repo={repo ?? null} stages={stages} events={events} />
+    <RunDetailClient
+      run={data.run}
+      repo={repo}
+      stages={data.stages}
+      events={data.events}
+    />
   );
 }

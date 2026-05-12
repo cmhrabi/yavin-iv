@@ -1,0 +1,1 @@
+ALTER TABLE "runs" ADD COLUMN "ticket_title" text;

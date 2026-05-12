@@ -8,7 +8,8 @@ already in.
 
 | # | Doc | Why now |
 | - | --- | ------- |
-| 3 | [`03-runs-api-and-db-wiring.md`](./03-runs-api-and-db-wiring.md) | Replaces `MOCK_RUNS` with real DB-backed runs and lights up Phase 2's research vertical end-to-end. `runs.created_by` is already a `uuid → users(id)` FK — copy `caller.userId` into it. The WS transport from todo 2 is ready — call `pubsub.publish({runId, message})` (not `pg_notify` directly), and remember that any new `WorkerToServer` / `ClientToServer` kind needs a handler in `src/server/ws.ts` or it'll be rejected with `4400 unhandled_kind:<kind>`. |
+|   | _none queued — see Phase 3 in `../implementation-plan.md` for the next slices: plan/code/review stage renderers, repo-config CRUD with credential encryption, concurrency enforcement, and real Jira/Linear/GitHub ticket lookup._ | |
 
 Done: [`../completed/01-api-key-auth.md`](../completed/01-api-key-auth.md),
-[`../completed/02-websocket-server.md`](../completed/02-websocket-server.md).
+[`../completed/02-websocket-server.md`](../completed/02-websocket-server.md),
+[`../completed/03-runs-api-and-db-wiring.md`](../completed/03-runs-api-and-db-wiring.md).

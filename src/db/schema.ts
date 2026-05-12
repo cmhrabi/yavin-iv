@@ -106,6 +106,7 @@ export const runs = pgTable(
     ticketProvider: ticketProviderEnum("ticket_provider").notNull(),
     ticketId: text("ticket_id").notNull(),
     ticketUrl: text("ticket_url").notNull(),
+    ticketTitle: text("ticket_title"),
     instructions: text("instructions").notNull().default(""),
     branchName: text("branch_name"),
     worktreePath: text("worktree_path"),
