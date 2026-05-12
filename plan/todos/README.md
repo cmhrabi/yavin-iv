@@ -8,7 +8,7 @@ already in.
 
 | # | Doc | Why now |
 | - | --- | ------- |
-| 2 | [`02-websocket-server.md`](./02-websocket-server.md) | Required for rogue-one to connect. The custom `server.ts` already has the attach point reserved. Auth verifier is in place — call `verifyApiKey(rawKey)` from `src/server/api-keys.ts` against the `?token=` query param. |
-| 3 | [`03-runs-api-and-db-wiring.md`](./03-runs-api-and-db-wiring.md) | Replaces `MOCK_RUNS` with real DB-backed runs and lights up Phase 2's research vertical end-to-end. `runs.created_by` is already a `uuid → users(id)` FK — copy `caller.userId` into it. |
+| 3 | [`03-runs-api-and-db-wiring.md`](./03-runs-api-and-db-wiring.md) | Replaces `MOCK_RUNS` with real DB-backed runs and lights up Phase 2's research vertical end-to-end. `runs.created_by` is already a `uuid → users(id)` FK — copy `caller.userId` into it. The WS transport from todo 2 is ready — call `pubsub.publish({runId, message})` (not `pg_notify` directly), and remember that any new `WorkerToServer` / `ClientToServer` kind needs a handler in `src/server/ws.ts` or it'll be rejected with `4400 unhandled_kind:<kind>`. |
 
-Done: [`../completed/01-api-key-auth.md`](../completed/01-api-key-auth.md).
+Done: [`../completed/01-api-key-auth.md`](../completed/01-api-key-auth.md),
+[`../completed/02-websocket-server.md`](../completed/02-websocket-server.md).
